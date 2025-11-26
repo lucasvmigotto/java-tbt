@@ -36,8 +36,8 @@ PUT {{HOST}}/doctors
 Content-Type: application/json
 
 {
-    "id": "6648ca74-b39b-46a1-8248-83fc05d8d622",
-    "email": "xxxx@xxx.com"
+    "id": "{{ID}}",
+    "email": "example@email.com"
 }
 
 ### @name Delete
