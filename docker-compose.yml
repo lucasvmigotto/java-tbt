@@ -1,0 +1,30 @@
+services:
+
+  postgres:
+    image: postgres:18-trixie
+    container_name: postgres
+    hostname: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES__USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES__PASSWORD:-rootroot}
+      POSTGRES_DB: ${POSTGRES__DB:-java_tbt}
+    volumes:
+      - java-tbt-postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: |
+        pg_isready \
+          -U $$POSTGRES_USER \
+          -d $$POSTGRES_DB
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+    - java-tbt-network
+
+networks:
+  java-tbt-network:
+    external: true
+
+volumes:
+  java-tbt-postgres-data:
+    external: true
