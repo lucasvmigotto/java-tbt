@@ -11,7 +11,7 @@ RUN \
     --mount=type=bind,source=src/,target=src/ \
     /app/mvnw package -DskipTests
 
-FROM eclipse-temurin:25-jre-ubi10-minimal AS final
+FROM gcr.io/distroless/java25-debian13 AS final
 
 WORKDIR /app
 
@@ -21,6 +21,4 @@ COPY \
     "/app/target/api*.jar" \
     "/app/api.jar"
 
-CMD ["java", "-jar", "/app/api.jar"]
-
-
+ENTRYPOINT ["java", "-jar", "/app/api.jar"]
