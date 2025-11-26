@@ -1,0 +1,11 @@
+@HOST=http://localhost:8080
+
+
+### @name Login
+POST {{HOST}}/auth
+Content-Type: application/json
+
+{
+    "username": "root",
+    "password": "rootroot"
+}
