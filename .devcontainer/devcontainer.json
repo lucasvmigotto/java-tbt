@@ -1,0 +1,92 @@
+{
+	"name": "java-tbt",
+	"build": {
+        "dockerfile": "./Dockerfile",
+        "context": ".."
+    },
+	"runArgs": [
+        "--rm",
+        "--name", "vsc-java-tbt",
+        "--env-file", ".env",
+        "--network", "java-tbt-network"
+    ],
+    "workspaceFolder": "/code",
+    "remoteUser": "vscode",
+    "mounts": [
+        {
+            "source": "${localWorkspaceFolder}",
+            "target": "/code",
+            "type": "bind"
+        },
+        {
+            "source": "java-tbt-dependencies",
+            "target": "/home/vscode/.m2",
+            "type": "volume"
+
+        }
+    ],
+	"features": {
+		"ghcr.io/devcontainers/features/java:1": {
+			"version": "none",
+			"installMaven": "false",
+			"installGradle": "true"
+		}
+	},
+    "initializeCommand": {
+        "docker-volume ": "[ -z $(docker volume ls -qf 'name=java-tbt-postgres-data') ] && docker volume create 'java-tbt-postgres-data' || echo 'Docker volume already exists'",
+        "docker-network": "[ -z $(docker network ls -qf 'name=java-tbt-network') ] && docker network create 'java-tbt-network' || echo 'Docker network already exists'",
+        ".env": "[ ! -f '.env' ] && (echo 'Creating .env from template' && cp .env.example .env) || echo '.env file found'"
+    },
+    "customizations": {
+		"vscode": {
+			"settings": {
+                "remote.autoForwardPorts": true,
+				"java.format.settings.profile": "GoogleStyle",
+                "java.format.settings.imports.regexp": "^[a-z.]*",
+                "java.checkstyle.configuration": "https://raw.githubusercontent.com/google/styleguide/refs/heads/gh-pages/intellij-java-google-style.xml",
+                "java.checkstyle.version": "9.3",
+                "java.autobuild.enabled": true,
+                "[java]": {
+					"editor.formatOnSave": true,
+					"editor.defaultFormatter": "redhat.java"
+				},
+                "editor.codeActionsOnSave": {
+                    "source.organizeImports": "explicit"
+                },
+                "workbench.colorTheme": "Vim Deep Dark",
+                "workbench.iconTheme": "vscode-icons"
+			},
+			"extensions": [
+				// Development
+                "redhat.java",
+                "vscjava.vscode-java-dependency",
+                "vscjava.vscode-java-test",
+                "vscjava.vscode-java-debug",
+                "vscjava.vscode-maven",
+                "vscjava.vscode-spring-boot-dashboard",
+                "vmware.vscode-spring-boot",
+                "Oracle.oracle-java",
+				// Style and Linting
+				"shengchen.vscode-checkstyle",
+				"DavidAnson.vscode-markdownlint",
+                "xyz.plsql-language",
+				// Utils
+				"EditorConfig.EditorConfig",
+				"mhutchie.git-graph",
+				"ryu1kn.partial-diff",
+				"mohsen1.prettify-json",
+				"njzy.stats-bar",
+				"DotJoshJohnson.xml",
+				"redhat.vscode-yaml",
+				"christian-kohler.path-intellisense",
+                "humao.rest-client",
+                "Cardinal90.multi-cursor-case-preserve",
+				// Miscellaneous
+                "HarryHopkinson.vim-theme",
+                "vscode-icons-team.vscode-icons",
+				"streetsidesoftware.code-spell-checker",
+				"streetsidesoftware.code-spell-checker-portuguese-brazilian"
+			]
+		}
+	}
+}
