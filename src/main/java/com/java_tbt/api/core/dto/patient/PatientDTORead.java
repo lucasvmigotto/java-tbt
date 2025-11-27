@@ -1,4 +1,4 @@
-package com.java_tbt.api.application.dto.patient;
+package com.java_tbt.api.core.dto.patient;
 
 import java.util.UUID;
 

@@ -1,8 +1,8 @@
-package com.java_tbt.api.application.dto.patient;
+package com.java_tbt.api.core.dto.patient;
 
 import java.util.UUID;
 
-import com.java_tbt.api.application.dto.address.AddressDTORead;
+import com.java_tbt.api.core.dto.address.AddressDTORead;
 import com.java_tbt.api.core.models.Patient;
 
 public record PatientDTOReadComplete(

@@ -1,4 +1,4 @@
-package com.java_tbt.api.application.dto.address;
+package com.java_tbt.api.core.dto.address;
 
 import com.java_tbt.api.core.models.Address;
 

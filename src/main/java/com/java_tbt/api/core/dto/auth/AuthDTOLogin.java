@@ -1,4 +1,4 @@
-package com.java_tbt.api.application.dto.auth;
+package com.java_tbt.api.core.dto.auth;
 
 public record AuthDTOLogin(String username, String password) {
 

@@ -1,4 +1,4 @@
-package com.java_tbt.api.application.dto.doctor;
+package com.java_tbt.api.core.dto.doctor;
 
 import java.util.UUID;
 
