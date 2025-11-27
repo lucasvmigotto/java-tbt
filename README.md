@@ -63,6 +63,7 @@ docker compose exec -it postgres psql -U postgres -d java_tbt
 * [Spring Web](https://docs.spring.io/spring-boot/4.0.0/reference/web/servlet.html)
 * [Spring Boot DevTools](https://docs.spring.io/spring-boot/4.0.0/reference/using/devtools.html)
 * [Flyway Migration](https://docs.spring.io/spring-boot/4.0.0/how-to/data-initialization.html#howto.data-initialization.migration-tool.flyway)
+* [GitHub Local Actions](https://sanjulaganepola.github.io/github-local-actions-docs/)
 
 ### Guides
 
