@@ -10,4 +10,8 @@ import com.java_tbt.api.core.models.Patient;
 
 public interface PatientRepository extends JpaRepository<Patient, UUID> {
     Page<Patient> findAllByActiveTrue(Pageable pagination);
+
+    Patient findByIdAndActiveTrue(UUID id);
+
+    boolean existsByIdAndActiveTrue(UUID id);
 }
