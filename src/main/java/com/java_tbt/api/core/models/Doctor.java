@@ -5,8 +5,8 @@ import java.util.UUID;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.type.PostgreSQLEnumJdbcType;
 
-import com.java_tbt.api.application.dto.doctor.DoctorDTOCreate;
-import com.java_tbt.api.application.dto.doctor.DoctorDTOUpdate;
+import com.java_tbt.api.core.dto.doctor.DoctorDTOCreate;
+import com.java_tbt.api.core.dto.doctor.DoctorDTOUpdate;
 import com.java_tbt.api.core.enums.Specialties;
 
 import jakarta.persistence.Column;
@@ -34,15 +34,22 @@ public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     private String name;
+
     @Column(unique = true)
     private String crm;
+
     private String email;
+
     @Enumerated(EnumType.STRING)
     @JdbcType(value = PostgreSQLEnumJdbcType.class)
     private Specialties specialty;
+
     private String phone;
+
     private Boolean active = true;
+
     @Embedded
     private Address address;
 

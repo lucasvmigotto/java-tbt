@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.java_tbt.api.application.dto.auth.AuthDTOCreate;
+import com.java_tbt.api.core.dto.auth.AuthDTOCreate;
 import com.java_tbt.api.core.enums.Roles;
 
 import jakarta.persistence.Column;

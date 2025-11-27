@@ -1,7 +1,7 @@
 package com.java_tbt.api.core.models;
 
-import com.java_tbt.api.application.dto.address.AddressDTOCreate;
-import com.java_tbt.api.application.dto.address.AddressDTOUpdate;
+import com.java_tbt.api.core.dto.address.AddressDTOCreate;
+import com.java_tbt.api.core.dto.address.AddressDTOUpdate;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

@@ -2,8 +2,8 @@ package com.java_tbt.api.core.models;
 
 import java.util.UUID;
 
-import com.java_tbt.api.application.dto.patient.PatientDTOCreate;
-import com.java_tbt.api.application.dto.patient.PatientDTOUpdate;
+import com.java_tbt.api.core.dto.patient.PatientDTOCreate;
+import com.java_tbt.api.core.dto.patient.PatientDTOUpdate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -28,12 +28,18 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     private String name;
+
     @Column(unique = true)
     private String cpf;
+
     private String email;
+
     private String phone;
+
     private Boolean active = true;
+
     @Embedded
     private Address address;
 
