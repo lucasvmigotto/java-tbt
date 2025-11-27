@@ -23,9 +23,16 @@
             "target": "/home/vscode/.m2",
             "type": "volume"
 
+        },
+        {
+            "source": "/var/run/docker.sock",
+            "target": "/var/run/docker.sock",
+            "type": "bind"
+
         }
     ],
 	"features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
 		"ghcr.io/devcontainers/features/java:1": {
 			"version": "none",
 			"installMaven": "false",
@@ -66,21 +73,25 @@
                 "vscjava.vscode-spring-boot-dashboard",
                 "vmware.vscode-spring-boot",
                 "Oracle.oracle-java",
+                // DevOps
+                "GitHub.vscode-github-actions",
+                "SanjulaGanepola.github-local-actions",
 				// Style and Linting
 				"shengchen.vscode-checkstyle",
 				"DavidAnson.vscode-markdownlint",
                 "xyz.plsql-language",
+                "Cardinal90.multi-cursor-case-preserve",
+                "DotJoshJohnson.xml",
+				"redhat.vscode-yaml",
+                "mohsen1.prettify-json",
 				// Utils
 				"EditorConfig.EditorConfig",
 				"mhutchie.git-graph",
 				"ryu1kn.partial-diff",
-				"mohsen1.prettify-json",
 				"njzy.stats-bar",
-				"DotJoshJohnson.xml",
-				"redhat.vscode-yaml",
 				"christian-kohler.path-intellisense",
                 "humao.rest-client",
-                "Cardinal90.multi-cursor-case-preserve",
+
 				// Miscellaneous
                 "HarryHopkinson.vim-theme",
                 "vscode-icons-team.vscode-icons",
