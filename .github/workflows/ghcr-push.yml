@@ -2,10 +2,8 @@ name: Push Docker Image to GitHub Container Registry
 
 
 on:
-  workflow_run:
-    workflows: ['Java CI - Maven Build']
-    types:
-      - completed
+  push:
+    branches: ['main']
 
 
 env:
