@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.java_tbt.api.application.dto.auth.AuthDTOLogin;
-import com.java_tbt.api.application.dto.auth.AuthDTOToken;
+import com.java_tbt.api.core.dto.auth.AuthDTOLogin;
+import com.java_tbt.api.core.dto.auth.AuthDTOToken;
 import com.java_tbt.api.core.models.User;
 import com.java_tbt.api.infra.services.TokenService;
 
@@ -21,25 +21,26 @@ import jakarta.validation.Valid;
 @RequestMapping("auth")
 public class AuthController {
 
-    @Autowired
-    private TokenService tokenService;
+        @Autowired
+        private TokenService tokenService;
 
-    @Autowired
-    private AuthenticationManager authManager;
+        @Autowired
+        private AuthenticationManager authManager;
 
-    @PostMapping
-    @Transactional
-    public ResponseEntity<AuthDTOToken> login(
-            @RequestBody @Valid AuthDTOLogin auth) {
-        System.out.println("dd");
-        String token = tokenService.generateToken(
-                (User) authManager
-                        .authenticate(
-                                new UsernamePasswordAuthenticationToken(auth.username(), auth.password()))
-                        .getPrincipal());
+        @PostMapping
+        @Transactional
+        public ResponseEntity<AuthDTOToken> login(
+                        @RequestBody @Valid AuthDTOLogin auth) {
+                System.out.println("dd");
+                String token = tokenService.generateToken(
+                                (User) authManager
+                                                .authenticate(
+                                                                new UsernamePasswordAuthenticationToken(auth.username(),
+                                                                                auth.password()))
+                                                .getPrincipal());
 
-        return ResponseEntity
-                .ok(new AuthDTOToken(token));
-    }
+                return ResponseEntity
+                                .ok(new AuthDTOToken(token));
+        }
 
 }

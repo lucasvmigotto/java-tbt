@@ -17,18 +17,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.java_tbt.api.application.dto.doctor.DoctorDTOCreate;
-import com.java_tbt.api.application.dto.doctor.DoctorDTORead;
-import com.java_tbt.api.application.dto.doctor.DoctorDTOReadComplete;
-import com.java_tbt.api.application.dto.doctor.DoctorDTOUpdate;
+import com.java_tbt.api.core.dto.doctor.DoctorDTOCreate;
+import com.java_tbt.api.core.dto.doctor.DoctorDTORead;
+import com.java_tbt.api.core.dto.doctor.DoctorDTOReadComplete;
+import com.java_tbt.api.core.dto.doctor.DoctorDTOUpdate;
 import com.java_tbt.api.core.models.Doctor;
 import com.java_tbt.api.data.repositories.DoctorRepository;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("doctors")
+@SecurityRequirement(name = "bearer-key")
 public class DoctorController {
     @Autowired
     private DoctorRepository repository;
@@ -55,7 +57,8 @@ public class DoctorController {
                 .findById(id)
                 .orElseThrow(
                         () -> new EntityNotFoundException(
-                                String.format("Doctor with Id %s not found", id.toString())));
+                                String.format("Doctor with Id %s not found",
+                                        id.toString())));
         return ResponseEntity.ok(new DoctorDTOReadComplete(entity));
     }
 
@@ -78,7 +81,8 @@ public class DoctorController {
                 .findById(UUID.fromString(doctor.id()))
                 .orElseThrow(
                         () -> new EntityNotFoundException(
-                                String.format("Doctor with Id %s not found", doctor.id())))
+                                String.format("Doctor with Id %s not found",
+                                        doctor.id())))
                 .update(doctor);
 
         Doctor updated = repository.save(entity);
@@ -93,7 +97,8 @@ public class DoctorController {
                 .findById(id)
                 .orElseThrow(
                         () -> new EntityNotFoundException(
-                                String.format("Doctor with Id %s not found", id.toString())))
+                                String.format("Doctor with Id %s not found",
+                                        id.toString())))
                 .delete();
 
         repository.save(entity);
