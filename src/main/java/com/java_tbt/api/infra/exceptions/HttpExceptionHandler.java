@@ -8,6 +8,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.java_tbt.api.core.exceptions.AppointmentValidationException;
+
 import jakarta.persistence.EntityNotFoundException;
 
 @RestControllerAdvice
@@ -35,6 +37,16 @@ public class HttpExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Void> handler404() {
         return ResponseEntity.notFound().build();
+    }
+
+    @ExceptionHandler(AppointmentValidationException.class)
+    public ResponseEntity<ValidationExceptionData> handler400(AppointmentValidationException exception) {
+        return ResponseEntity
+                .badRequest()
+                .body(
+                        new ValidationExceptionData(
+                                null,
+                                exception.getMessage()));
     }
 
 }
