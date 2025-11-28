@@ -1,0 +1,69 @@
+@HOST=http://localhost:8080
+
+@USERNAME=root
+@PASSWORD=rootroot
+
+
+###
+# @name Login
+# @tag auth
+# @capture global auth.token {{response.json.token}}
+POST {{HOST}}/auth
+Content-Type: application/json
+
+{
+    "username": "{{USERNAME}}",
+    "password": "{{PASSWORD}}"
+}
+
+###
+# @name Read
+# @auth bearer {{auth.token}}
+GET {{HOST}}/patients/{{patient.id}}
+
+###
+# @name List
+# @auth bearer {{auth.token}}
+GET {{HOST}}/patients
+
+###
+# @name ListComplete
+# @auth bearer {{auth.token}}
+GET {{HOST}}/patients/complete
+
+###
+# @name Create
+# @auth bearer {{auth.token}}
+# @capture global patient.id {{response.json.id}}
+POST {{HOST}}/patients
+Content-Type: application/json
+
+{
+    "name": "Patient",
+    "cpf": "00000000000",
+    "email": "email@email.com",
+    "phone": "5511999999999",
+    "address": {
+        "firstLine": "Street X",
+        "secondLine": "Lower",
+        "number": 42,
+        "zipCode": "00000000",
+        "complement": "High tree"
+    }
+}
+
+###
+# @name Update
+# @auth bearer {{auth.token}}
+PUT {{HOST}}/patients
+Content-Type: application/json
+
+{
+    "id": "{{patient.id}}",
+    "email": "example@email.com"
+}
+
+###
+# @name Delete
+# @auth bearer {{auth.token}}
+DELETE {{HOST}}/patients/{{patient.id}}

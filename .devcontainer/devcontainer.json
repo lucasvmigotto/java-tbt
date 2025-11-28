@@ -29,6 +29,11 @@
             "target": "/var/run/docker.sock",
             "type": "bind"
 
+        },
+        {
+            "source": "devcontainer-java-tbt-extensions",
+            "target": "/root/.vscode-server/extensions",
+            "type": "volume"
         }
     ],
 	"features": {
@@ -43,6 +48,9 @@
         "docker-volume ": "[ -z $(docker volume ls -qf 'name=java-tbt-postgres-data') ] && docker volume create 'java-tbt-postgres-data' || echo 'Docker volume already exists'",
         "docker-network": "[ -z $(docker network ls -qf 'name=java-tbt-network') ] && docker network create 'java-tbt-network' || echo 'Docker network already exists'",
         ".env": "[ ! -f '.env' ] && (echo 'Creating .env from template' && cp .env.example .env) || echo '.env file found'"
+    },
+    "updateContentCommand": {
+        "docke-remove-config": "rm -r $HOME/.docker/config.json"
     },
     "customizations": {
 		"vscode": {
@@ -91,7 +99,6 @@
 				"njzy.stats-bar",
 				"christian-kohler.path-intellisense",
                 "humao.rest-client",
-
 				// Miscellaneous
                 "HarryHopkinson.vim-theme",
                 "vscode-icons-team.vscode-icons",

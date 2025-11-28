@@ -1,0 +1,5 @@
+package com.java_tbt.api.core.dto.auth;
+
+public record AuthDTOToken(String token) {
+
+}

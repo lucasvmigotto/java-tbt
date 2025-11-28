@@ -17,18 +17,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.java_tbt.api.application.dto.patient.PatientDTOCreate;
-import com.java_tbt.api.application.dto.patient.PatientDTORead;
-import com.java_tbt.api.application.dto.patient.PatientDTOReadComplete;
-import com.java_tbt.api.application.dto.patient.PatientDTOUpdate;
+import com.java_tbt.api.core.dto.patient.PatientDTOCreate;
+import com.java_tbt.api.core.dto.patient.PatientDTORead;
+import com.java_tbt.api.core.dto.patient.PatientDTOReadComplete;
+import com.java_tbt.api.core.dto.patient.PatientDTOUpdate;
 import com.java_tbt.api.core.models.Patient;
 import com.java_tbt.api.data.repositories.PatientRepository;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("patients")
+@SecurityRequirement(name = "bearer-key")
 public class PatientController {
     @Autowired
     private PatientRepository repository;
@@ -55,7 +57,8 @@ public class PatientController {
                 .findById(id)
                 .orElseThrow(
                         () -> new EntityNotFoundException(
-                                String.format("Patient with Id %s not found", id.toString())));
+                                String.format("Patient with Id %s not found",
+                                        id.toString())));
         return ResponseEntity.ok(new PatientDTOReadComplete(entity));
     }
 
@@ -78,7 +81,8 @@ public class PatientController {
                 .findById(UUID.fromString(patient.id()))
                 .orElseThrow(
                         () -> new EntityNotFoundException(
-                                String.format("Patient with Id %s not found", patient.id())))
+                                String.format("Patient with Id %s not found",
+                                        patient.id())))
                 .update(patient);
 
         Patient updated = repository.save(entity);
@@ -93,7 +97,8 @@ public class PatientController {
                 .findById(id)
                 .orElseThrow(
                         () -> new EntityNotFoundException(
-                                String.format("Patient with Id %s not found", id.toString())))
+                                String.format("Patient with Id %s not found",
+                                        id.toString())))
                 .delete();
 
         repository.save(entity);
