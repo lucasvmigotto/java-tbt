@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 
 public record AppointmentDTOCreate(
-                @NotBlank String idDoctor, @NotBlank String idPatient, @Future LocalDateTime datetime) {
+        @NotBlank String idDoctor,
+        @NotBlank String idPatient,
+        @Future LocalDateTime datetime) {
 
 }
