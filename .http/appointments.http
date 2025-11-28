@@ -1,0 +1,65 @@
+@HOST=http://localhost:8080
+
+@USERNAME=root
+@PASSWORD=rootroot
+
+@START_PERIOD=2030-01-01T00%3A00%3A00
+@END_PERIOD=2030-01-05T00%3A00%3A00
+
+###
+# @name Login
+# @tag auth
+# @capture global auth.token {{response.json.token}}
+POST {{HOST}}/auth
+Content-Type: application/json
+
+{
+    "username": "{{USERNAME}}",
+    "password": "{{PASSWORD}}"
+}
+
+###
+# @name ListDoctors
+# @auth bearer {{auth.token}}
+# @capture global doctor.id {{response.json.content.[0].id}}
+GET {{HOST}}/doctors
+
+###
+# @name ListPatients
+# @auth bearer {{auth.token}}
+# @capture global patient.id {{response.json.content.[0].id}}
+GET {{HOST}}/patients
+
+###
+# @name CreateAppointment
+# @auth bearer {{auth.token}}
+# @capture global appointment.id {{response.json.id}}
+POST {{HOST}}/appointments
+Content-Type: application/json
+
+{
+    "idDoctor": "{{doctor.id}}",
+    "idPatient": "{{patient.id}}",
+    "datetime": "2030-01-01T12:00:00.000Z"
+}
+
+###
+# @name ListByPatientId
+# @auth bearer {{auth.token}}
+GET {{HOST}}/appointments/patient/{{patient.id}}
+    ?isCancelled=false
+    &startPeriod={{START_PERIOD}}
+    &endPeriod={{END_PERIOD}}
+
+###
+# @name ListByDoctorId
+# @auth bearer {{auth.token}}
+GET {{HOST}}/appointments/doctor/{{doctor.id}}
+    ?isCancelled=false
+    &startPeriod={{START_PERIOD}}
+    &endPeriod={{END_PERIOD}}
+
+###
+# @name CancelAppointment
+# @auth bearer {{auth.token}}
+PATCH {{HOST}}/appointments/{{appointment.id}}
