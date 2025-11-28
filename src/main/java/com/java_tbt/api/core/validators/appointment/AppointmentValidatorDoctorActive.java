@@ -17,7 +17,7 @@ public class AppointmentValidatorDoctorActive implements BaseAppointmentValidato
 
     @Override
     public void validate(AppointmentDTOCreate appointment) {
-        if (repository.findByIdAndActiveTrue(UUID.fromString(appointment.idDoctor())) != null) {
+        if (!repository.existsByIdAndActiveTrue(UUID.fromString(appointment.idDoctor()))) {
             throw new AppointmentValidationException("This Doctor is no longer active");
         }
     }
